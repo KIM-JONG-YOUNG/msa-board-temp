@@ -74,9 +74,6 @@ msa-board-client-search
 ├── msa-board-client-core:compile
 └── msa-board-common:compile
 
-msa-board-domains:pom
-└── msa-board-common:compile
-
 msa-board-domain-core
 ├── msa-board-core-redis:provided
 └── msa-board-common:compile
