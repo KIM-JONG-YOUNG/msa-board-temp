@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.18</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.jong.msa.board</groupId>
+	<artifactId>msa-board</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>msa-board-common</module>
+		<module>msa-board-cores</module>
+		<module>msa-board-clients</module>
+		<module>msa-board-domains</module>
+		<module>msa-board-clouds</module>
+		<module>msa-board-microservices</module>
+		<module>msa-board-endpoints</module>
+	</modules>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<spring-cloud.version>2021.0.9</spring-cloud.version>
+		<springdoc.openapi-ui.version>1.7.0</springdoc.openapi-ui.version>
+		<spring-boot.redisson.version>3.17.7</spring-boot.redisson.version>
+		<embedded.redis.version>0.7.2</embedded.redis.version>
+		<mapstruct.version>1.5.2.Final</mapstruct.version>
+		<jjwt.version>0.9.1</jjwt.version>
+	</properties>
+
+	<dependencies>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- SpringDoc OpenAPI UI -->
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc.openapi-ui.version}</version>
+			</dependency>
+			<!-- Spring Boot Redisson -->
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson-spring-boot-starter</artifactId>
+				<version>${spring-boot.redisson.version}</version>
+			</dependency>
+			<!-- Embedded Redis -->
+			<dependency>
+				<groupId>it.ozimov</groupId>
+				<artifactId>embedded-redis</artifactId>
+				<version>${embedded.redis.version}</version>
+			</dependency>
+			<!-- Mapstruct -->
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${mapstruct.version}</version>
+			</dependency>
+			<!-- JWT -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>${jjwt.version}</version>
+			</dependency>
+			<!-- MSA Board Common -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Redis Core -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-core-redis</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Kafka Core -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-core-kafka</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Domain Core -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Member Domain -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-domain-member</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Post Domain -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-domain-post</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Client Core -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-client-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Member Client -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-client-member</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Post Client -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-client-post</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- MSA Board Search Client -->
+			<dependency>
+				<groupId>com.jong.msa.board</groupId>
+				<artifactId>msa-board-client-search</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

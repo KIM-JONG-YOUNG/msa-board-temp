@@ -1,0 +1,135 @@
+# Server Port 
+server:
+  port: 8002
+
+# Disable Default Error Page
+  error:
+    whitelabel:
+      enabled: false
+      
+# Handle Not Found Error
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+      
+# Database
+  datasource:
+    hikari:
+      driver-class-name: org.mariadb.jdbc.Driver
+      username: root
+      password: root
+
+# Init SQL      
+  sql:
+    init:
+      mode: always
+      schema-locations: 
+        - classpath:sql/schema-member.sql
+        - classpath:sql/schema-post.sql
+      
+# JPA
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+# Kafka
+  kafka:
+    producer:
+      properties:
+        max.block.ms: 60000
+        delivery.timeout.ms: 60000
+        request.timeout.ms: 30000
+        retry.backoff.ms: 1000
+    consumer:
+      auto-offset-reset: earliest
+      properties:
+        retry.backoff.ms: 1000
+              
+# Feign Client
+feign:
+  okhttp:
+    enabled: true
+
+# Swagger
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+  cache:
+    disabled: true
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, env, refresh, beans, loggers
+        
+# Eureka Client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    
+---
+
+### Local ###
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+# Database
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mariadb://localhost:33306/microservice
+
+# Redis
+  redis:
+    host: localhost
+    port: 17617
+
+# Kafka
+  kafka:
+    producer:
+      bootstrap-servers: localhost:39092
+    consumer:
+      bootstrap-servers: localhost:39092
+
+---
+
+### Docker ###
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+# Database
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mariadb://msa-board-mariadb-search:3306/microservice
+
+# Redis
+  redis:
+    host: msa-board-redis-predixy
+    port: 7617
+
+# Kafka
+  kafka:
+    producer:
+      bootstrap-servers: msa-board-kafka-broker-3:9092
+    consumer:
+      bootstrap-servers: msa-board-kafka-broker-3:9092

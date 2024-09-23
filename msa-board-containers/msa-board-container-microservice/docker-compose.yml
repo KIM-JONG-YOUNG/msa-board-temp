@@ -1,0 +1,90 @@
+version: '3'
+
+networks:
+  msa-board-microservice-network:
+    name: msa-board-microservice-network
+    driver: bridge
+  msa-board-cloud-network:
+    name: msa-board-cloud-network
+    driver: bridge
+    external: true
+  msa-board-mariadb-network:
+    name: msa-board-mariadb-network
+    driver: bridge
+    external: true
+  msa-board-kafka-network:
+    name: msa-board-kafka-network
+    driver: bridge
+    external: true
+  msa-board-redis-network:
+    name: msa-board-redis-network
+    driver: bridge
+    external: true
+
+services:
+
+  msa-board-microservice-member:
+    image: msa-board-microservice-member
+    build:
+      context: ../../
+      dockerfile: msa-board-microservices/msa-board-microservice-member/Dockerfile
+    container_name: msa-board-microservice-member
+    hostname: msa-board-microservice-member
+    networks:
+      - msa-board-microservice-network
+      - msa-board-cloud-network
+      - msa-board-mariadb-network
+      - msa-board-kafka-network
+      - msa-board-redis-network
+    ports:
+      - 18001:8001
+    command:
+      - "--spring.config.import=configserver:http://msa-board-cloud-config:8888"
+      - "--spring.profiles.active=docker"
+      - "--eureka.client.service-url.defaultZone=http://msa-board-cloud-eureka:8761/eureka"
+      - "--eureka.instance.instance-id=MICROSERVICE-MEMBER-DOCKER"
+      - "--eureka.instance.status-page-url=http://localhost:18001/swagger-ui/index.html"
+
+  msa-board-microservice-post:
+    image: msa-board-microservice-post
+    build:
+      context: ../../
+      dockerfile: msa-board-microservices/msa-board-microservice-post/Dockerfile
+    container_name: msa-board-microservice-post
+    hostname: msa-board-microservice-post
+    networks:
+      - msa-board-microservice-network
+      - msa-board-cloud-network
+      - msa-board-mariadb-network
+      - msa-board-kafka-network
+      - msa-board-redis-network
+    ports:
+      - 18002:8002
+    command:
+      - "--spring.config.import=configserver:http://msa-board-cloud-config:8888"
+      - "--spring.profiles.active=docker"
+      - "--eureka.client.service-url.defaultZone=http://msa-board-cloud-eureka:8761/eureka"
+      - "--eureka.instance.instance-id=MICROSERVICE-POST-DOCKER"
+      - "--eureka.instance.status-page-url=http://localhost:18002/swagger-ui/index.html"
+
+  msa-board-microservice-search:
+    image: msa-board-microservice-search
+    build:
+      context: ../../
+      dockerfile: msa-board-microservices/msa-board-microservice-search/Dockerfile
+    container_name: msa-board-microservice-search
+    hostname: msa-board-microservice-search
+    networks:
+      - msa-board-microservice-network
+      - msa-board-cloud-network
+      - msa-board-mariadb-network
+      - msa-board-kafka-network
+      - msa-board-redis-network
+    ports:
+      - 18003:8003
+    command:
+      - "--spring.config.import=configserver:http://msa-board-cloud-config:8888"
+      - "--spring.profiles.active=docker"
+      - "--eureka.client.service-url.defaultZone=http://msa-board-cloud-eureka:8761/eureka"
+      - "--eureka.instance.instance-id=MICROSERVICE-SEARCH-DOCKER"
+      - "--eureka.instance.status-page-url=http://localhost:18003/swagger-ui/index.html"

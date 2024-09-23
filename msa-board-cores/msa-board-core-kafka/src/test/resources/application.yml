@@ -1,0 +1,14 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      properties:
+        max.block.ms: 5000          
+        retry.backoff.ms: 1000      
+    consumer:
+      bootstrap-servers: localhost:9092
+      auto-offset-reset: earliest
+      properties:
+        retry.backoff.ms: 1000      # 소비 실패 시 재전송을 위한 대기 시간 
+    properties:
+      error.log.path: ./kafka-error
