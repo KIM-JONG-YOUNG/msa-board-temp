@@ -1,4 +1,5 @@
 # msa-board
+> 멀티 모듈 구조의 게시판 구현 
 
 ## 개발 환경 
  - JDK 1.8
@@ -46,40 +47,6 @@
 └── target
     ├── excutable-jar  : Spring Boot Excutable Jar 
     └── maven-jar      : Maven Jar
-```
-
-## 어플리케이션 Docker Compose 실행 명령어
-> Docker Compose 별 network를 생성하며 하위의 Docker Compose는 상위의 Docker Compose의 network를 사용하므로 순서대로 실행 
-> Application Docker Compose를 실행 시 각 어플리케이션 프로젝트 내의 Dockerfile이 필요하며 target 폴더 상의 빌드 jar 필요  
- - Maria DB Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-mariadb
-docker-compose up -d 
-```
- - Redis Cluster Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-redis
-docker-compose up -d 
-```
- - Kafka Cluster Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-kafka
-docker-compose up -d 
-```
- - Config/Eureka Application Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-cloud
-docker-compose up -d 
-```
- - Microservice Application Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-microservice
-docker-compose up -d --build
-```
- - Endpoint Application Docker Compose
-```
-cd ./msa-board-containers/msa-board-container-endpoint
-docker-compose up -d --build
 ```
 
 ## 프로젝트 의존성 
@@ -171,4 +138,39 @@ msa-board-endpoint-user
 |   └── msa-board-client-core:compile
 ├── msa-board-client-post:compile
 └── msa-board-client-search:compile
+```
+
+
+## 어플리케이션 Docker Compose 실행 명령어
+> Docker Compose 별 network를 생성하며 하위의 Docker Compose는 상위의 Docker Compose의 network를 사용하므로 순서대로 실행 
+> Application Docker Compose를 실행 시 각 어플리케이션 프로젝트 내의 Dockerfile이 필요하며 target 폴더 상의 빌드 jar 필요  
+ - Maria DB Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-mariadb
+docker-compose up -d 
+```
+ - Redis Cluster Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-redis
+docker-compose up -d 
+```
+ - Kafka Cluster Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-kafka
+docker-compose up -d 
+```
+ - Config/Eureka Application Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-cloud
+docker-compose up -d 
+```
+ - Microservice Application Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-microservice
+docker-compose up -d --build
+```
+ - Endpoint Application Docker Compose
+```
+cd ./msa-board-containers/msa-board-container-endpoint
+docker-compose up -d --build
 ```
