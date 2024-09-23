@@ -157,7 +157,7 @@ docker-compose up -d
  - Config/Eureka Application Docker Compose
 ```
 cd ./msa-board-containers/msa-board-container-cloud
-docker-compose up -d 
+docker-compose up -d --build
 ```
  - Microservice Application Docker Compose
 ```
@@ -171,6 +171,7 @@ docker-compose up -d --build
 ```
 
 ## 참고사항
+
  - msa-board-client-core의 FeignClientCondition <br>
    => spring.application.name 과 @FeignClient 의 이름이 다른 경우에만 Feign Client Bean 생성
    
