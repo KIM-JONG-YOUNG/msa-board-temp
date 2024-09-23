@@ -140,8 +140,7 @@ msa-board-endpoint-user
 └── msa-board-client-search:compile
 ```
 
-
-## 어플리케이션 Docker Compose 실행 명령어
+## Docker Compose 실행 명령어
 > Docker Compose 별 network를 생성하며 하위의 Docker Compose는 상위의 Docker Compose의 network를 사용하므로 순서대로 실행 
 > Application Docker Compose를 실행 시 각 어플리케이션 프로젝트 내의 Dockerfile이 필요하며 target 폴더 상의 빌드 jar 필요  
  - Maria DB Docker Compose
@@ -174,3 +173,12 @@ docker-compose up -d --build
 cd ./msa-board-containers/msa-board-container-endpoint
 docker-compose up -d --build
 ```
+
+## 참고사항
+ - msa-board-client-core의 FeignClientCondition <br>
+   => spring.application.name 과 @FeignClient 의 이름이 다른 경우에만 Feign Client Bean 생성 
+ - msa-board-client-core 모듈은 Spring Security 및 JWT, msa-board-core-redis 의존성을 provided로 제공 <br>
+   => Spring Security의 클래스가 런타임에 존재할 경우 토큰 기반 인증 필터 및 설정 활성화 
+ - msa-board-domain-core 모듈은 msa-board-core-redis 의존성을 provided로 제공 <br>
+   => msa-board-core-redis의 클래스가 런타임에 존재할 경우 분산 트랜잭션 사용 가능  
+
