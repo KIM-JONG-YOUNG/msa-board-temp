@@ -8,7 +8,12 @@
  - Json Web Token 0.9.1
  - Docker 24.0.6
  - Docker Compose 2.21.0
- 
+
+## 서비스 구조
+
+![image](https://github.com/user-attachments/assets/72b3556b-1506-4009-95f6-3404a3941e88)
+
+
 ## 프로젝트 구조 
 ```
 ./msa-board
